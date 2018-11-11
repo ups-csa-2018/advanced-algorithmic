@@ -184,7 +184,7 @@ void bheap_percolate_down(bheap_t *heap, unsigned int index)
 
 void bheap_get_k_first(bheap_t *heap, unsigned int k, value_t *result)
 {
-    assert(k < heap->count);
+    assert(k <= heap->count);
 
     bheap_t *h = bheap_dup(heap);
 
