@@ -46,7 +46,41 @@ sys	0m0.000s
 
 N.B.: similar tools exist on Windows and BSD.
 
+### Some timing examples
 
+Here's a simple bash command that create a list of numbers (and can be
+configured with variables `N`, `K`, and `MAXVAL`), then stores it into a
+variable named `LIST_NUMBERS`:
 
+```
+LIST_NUMBERS=$(N=300000; K=30000; MAXVAL=1000000; echo "$N $K"; \
+    for ((i = 0; i < $N; i++)); \
+        do echo -n "$(((RANDOM % $MAXVAL) + 1)) "; \
+    done; echo "")
+```
 
+You can then pass this variable to the standard input of the four exercises to
+easily compare their execution time:
 
+```
+$ time (echo "$LIST_NUMBERS" | ./exercise1 > /dev/null)
+
+real	0m11.473s
+user	0m11.427s
+sys	0m0.014s
+$ time (echo "$LIST_NUMBERS" | ./exercise2 > /dev/null)
+
+real	0m0.105s
+user	0m0.102s
+sys	0m0.006s
+$ time (echo "$LIST_NUMBERS" | ./exercise3 > /dev/null)
+
+real	0m0.140s
+user	0m0.125s
+sys	0m0.021s
+time (echo "$LIST_NUMBERS" | ./exercise-addendum > /dev/null)
+
+real	0m0.145s
+user	0m0.125s
+sys	0m0.025s
+```
