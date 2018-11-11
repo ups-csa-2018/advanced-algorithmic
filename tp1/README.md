@@ -28,7 +28,7 @@ $ make test-suite
 ## Additionnal notes
 
 Regarding exercises that required to time the execution of different algorithms
-and compare their respective execution time, I intentionnaly chose to not
+and compare their respective execution time, I intentionally chose to not
 handle that in the algorithm itself. GNU/Linux provides some useful tools to
 achieve the exact same goal.
 
@@ -48,8 +48,8 @@ N.B.: similar tools exist on Windows and BSD.
 
 ### Some timing examples
 
-Here's a simple bash command that create a list of numbers (and can be
-configured with variables `N`, `K`, and `MAXVAL`), then stores it into a
+Here's a simple bash command that creates a list of numbers (and can be
+configured with the variables: `N`, `K`, and `MAXVAL`), then stores it into a
 variable named `LIST_NUMBERS`:
 
 ```bash
@@ -78,7 +78,7 @@ $ time (echo "$LIST_NUMBERS" | ./exercise3 > /dev/null)
 real	0m0.140s
 user	0m0.125s
 sys	0m0.021s
-time (echo "$LIST_NUMBERS" | ./exercise-addendum > /dev/null)
+$ time (echo "$LIST_NUMBERS" | ./exercise-addendum > /dev/null)
 
 real	0m0.145s
 user	0m0.125s
