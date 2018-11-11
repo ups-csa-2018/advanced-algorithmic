@@ -7,7 +7,7 @@ This project uses GNU autotools
 [automake](https://www.gnu.org/software/automake/)) to provide build
 instructions:
 
-```
+```bash
 # clone the repository && and go to the tp1 directory
 $ git clone https://github.com/ups-csa-2018/advanced-algorithmic && cd tp1
 # setup and launch autotools build
@@ -21,7 +21,7 @@ $ make
 Once you've initialized the repository and autotools (cf. the previous
 section), you can run the test suite with:
 
-```
+```bash
 $ make test-suite
 ```
 
@@ -35,7 +35,7 @@ achieve the exact same goal.
 For example, you can use the [`time(1)`](https://linux.die.net/man/1/time)
 utility to get a report of the time used by a process:
 
-```
+```bash
 $ time exercise1 tests/test1-input.txt
 50 30 23
 
@@ -52,7 +52,7 @@ Here's a simple bash command that create a list of numbers (and can be
 configured with variables `N`, `K`, and `MAXVAL`), then stores it into a
 variable named `LIST_NUMBERS`:
 
-```
+```bash
 LIST_NUMBERS=$(N=300000; K=30000; MAXVAL=1000000; echo "$N $K"; \
     for ((i = 0; i < $N; i++)); \
         do echo -n "$(((RANDOM % $MAXVAL) + 1)) "; \
@@ -62,7 +62,7 @@ LIST_NUMBERS=$(N=300000; K=30000; MAXVAL=1000000; echo "$N $K"; \
 You can then pass this variable to the standard input of the four exercises to
 easily compare their execution time:
 
-```
+```bash
 $ time (echo "$LIST_NUMBERS" | ./exercise1 > /dev/null)
 
 real	0m11.473s
