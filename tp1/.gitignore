@@ -16,5 +16,7 @@ exercise1
 exercise1.o
 exercise2
 exercise2.o
+exercise3
+exercise3.o
 install-sh
 missing
