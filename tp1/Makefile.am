@@ -1,5 +1,5 @@
 AM_CFLAGS = -pedantic -Wall -Wextra -std=gnu17
-AM_LDFLAGS = -lpthread
+AM_LDFLAGS =
 
 bin_PROGRAMS = exercise1 exercise2 exercise3 exercise-addendum
 exercise1_SOURCES = exercise1.c common.c

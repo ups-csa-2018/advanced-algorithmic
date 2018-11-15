@@ -11,12 +11,18 @@ bool bheap_has_left(bheap_t *heap, unsigned int index);
 unsigned int bheap_left(bheap_t *heap, unsigned int index);
 bool bheap_has_right(bheap_t *heap, unsigned int index);
 unsigned int bheap_right(bheap_t *heap, unsigned int index);
-void bheap_build(bheap_t *heap, unsigned int n, value_t *numbers);
+void bheap_build_williams(bheap_t *heap, unsigned int n, value_t *numbers);
+void bheap_build_floyd(bheap_t *heap, unsigned int n, value_t *numbers);
 void bheap_percolate_up(bheap_t *heap, unsigned int index);
 void bheap_percolate_down(bheap_t *heap, unsigned int index);
 
 // binary heap
-bheap_t *bheap_create(bheap_type_t type, unsigned int n, value_t *numbers, unsigned int size)
+bheap_t *bheap_create(
+    bheap_type_t type,
+    unsigned int n,
+    value_t *numbers,
+    unsigned int size,
+    bheap_build_type_t build_type)
 {
     assert(size >= n);
 
@@ -26,7 +32,11 @@ bheap_t *bheap_create(bheap_type_t type, unsigned int n, value_t *numbers, unsig
     heap->type = type;
     heap->count = 0;
 
-    bheap_build(heap, n, numbers);
+    if (build_type == williams) {
+        bheap_build_williams(heap, n, numbers);
+    } else {
+        bheap_build_floyd(heap, n, numbers);
+    }
 
     return heap;
 }
@@ -53,11 +63,20 @@ bheap_t *bheap_dup(bheap_t *heap)
     return heap2;
 }
 
-// This is the suboptimal Williams' method.
-void bheap_build(bheap_t *heap, unsigned int n, value_t *numbers)
+void bheap_build_williams(bheap_t *heap, unsigned int n, value_t *numbers)
 {
     for (unsigned int i = 0; i < n; i++) {
         bheap_insert(heap, numbers[i]);
+    }
+}
+
+void bheap_build_floyd(bheap_t *heap, unsigned int n, value_t *numbers)
+{
+    memcpy(heap->data, numbers, sizeof(value_t) * n);
+    heap->count = n;
+
+    for (unsigned int i = n / 2 + 1; --i > 0;) {
+        bheap_percolate_down(heap, i - 1);
     }
 }
 

@@ -4,7 +4,7 @@
 
 void heap_sort(unsigned int n, value_t *numbers, value_t *result)
 {
-    bheap_t *heap = bheap_create(max, n, numbers, n);
+    bheap_t *heap = bheap_create(max, n, numbers, n, floyd);
     bheap_get_k_first(heap, n, result);
     bheap_destroy(heap);
 }

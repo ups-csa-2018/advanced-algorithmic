@@ -5,6 +5,11 @@ typedef enum {
     max
 } bheap_type_t;
 
+typedef enum {
+    williams,
+    floyd
+} bheap_build_type_t;
+
 typedef int value_t;
 
 typedef struct {
@@ -14,7 +19,12 @@ typedef struct {
     bheap_type_t type;
 } bheap_t;
 
-bheap_t *bheap_create(bheap_type_t type, unsigned int n, value_t *numbers, unsigned int size);
+bheap_t *bheap_create(
+    bheap_type_t type,
+    unsigned int n,
+    value_t *numbers,
+    unsigned int size,
+    bheap_build_type_t build_type);
 bheap_t *bheap_dup(bheap_t *heap);
 void bheap_destroy(bheap_t *heap);
 void bheap_insert(bheap_t *heap, value_t value);
