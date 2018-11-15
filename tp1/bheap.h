@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stdbool.h>
+
 typedef enum {
     min,
     max
@@ -31,3 +33,4 @@ void bheap_insert(bheap_t *heap, value_t value);
 void bheap_remove(bheap_t *heap, unsigned int index);
 void bheap_get_k_first(bheap_t *heap, unsigned int k, value_t *result);
 void bheap_debug_print(bheap_t *heap);
+bool bheap_are_constraints_respected(bheap_t *heap);

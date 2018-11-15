@@ -1,6 +1,5 @@
 #include "bheap.h"
 #include <assert.h>
-#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -15,6 +14,7 @@ void bheap_build_williams(bheap_t *heap, unsigned int n, value_t *numbers);
 void bheap_build_floyd(bheap_t *heap, unsigned int n, value_t *numbers);
 void bheap_percolate_up(bheap_t *heap, unsigned int index);
 void bheap_percolate_down(bheap_t *heap, unsigned int index);
+bool bheap_are_constraints_respected_i(bheap_t *heap, unsigned int i);
 
 // binary heap
 bheap_t *bheap_create(
@@ -226,4 +226,40 @@ void bheap_debug_print(bheap_t *heap)
     }
 
     printf("\n");
+}
+
+bool bheap_are_constraints_respected(bheap_t *heap)
+{
+    assert(heap != NULL);
+
+    return bheap_are_constraints_respected_i(heap, 0);
+}
+bool bheap_are_constraints_respected_i(bheap_t *heap, unsigned int i)
+{
+    value_t value = heap->data[i];
+
+    bool left_respected = true;
+    bool right_respected = true;
+
+    if (bheap_has_right(heap, i)) {
+        value_t right_value = heap->data[bheap_right(heap, i)];
+        if ((heap->type == max && value < right_value)
+            || (heap->type == min && value > right_value)) {
+            return false;
+        }
+
+        right_respected = bheap_are_constraints_respected_i(heap, bheap_right(heap, i));
+    }
+
+    if (bheap_has_left(heap, i)) {
+        value_t left_value = heap->data[bheap_left(heap, i)];
+        if ((heap->type == max && value < left_value)
+            || (heap->type == min && value > left_value)) {
+            return false;
+        }
+
+        left_respected = bheap_are_constraints_respected_i(heap, bheap_left(heap, i));
+    }
+
+    return left_respected && right_respected;
 }
