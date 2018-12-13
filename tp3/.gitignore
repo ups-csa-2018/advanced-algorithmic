@@ -1,0 +1,14 @@
+.deps/
+Makefile
+Makefile.in
+aclocal.m4
+autom4te.cache
+build-aux
+config.log
+config.status
+configure
+main.o
+matrix.o
+ubqp
+ubqp.o
+vector.o
